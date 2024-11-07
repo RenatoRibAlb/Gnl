@@ -6,7 +6,7 @@
 /*   By: reribeir <reribeir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 07:02:05 by reribeir          #+#    #+#             */
-/*   Updated: 2024/11/05 14:38:51 by reribeir         ###   ########.fr       */
+/*   Updated: 2024/11/07 14:44:09 by reribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 #ifndef BUFFER_SIZE
-# define BUFFER_SIZE
+# define BUFFER_SIZE 42
 #endif
 
 # include <unistd.h>

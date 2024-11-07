@@ -6,7 +6,7 @@
 /*   By: reribeir <reribeir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:42:12 by reribeir          #+#    #+#             */
-/*   Updated: 2024/11/05 14:38:26 by reribeir         ###   ########.fr       */
+/*   Updated: 2024/11/07 14:40:54 by reribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static char	*ft_strjoin(char const *s1, char const *s2)
 	return (ns);
 }
 
-char	*ft_strchr(const char *s, int c)
+static char	*ft_strchr(const char *s, int c)
 {
 	char	*str;
 
