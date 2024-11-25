@@ -6,7 +6,7 @@
 /*   By: reribeir <reribeir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:42:12 by reribeir          #+#    #+#             */
-/*   Updated: 2024/11/07 14:40:54 by reribeir         ###   ########.fr       */
+/*   Updated: 2024/11/21 13:20:50 by reribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,8 @@ static char	*ft_strjoin(char const *s1, char const *s2)
 		i++;
 		len++;
 	}
+	free(s1);
+	free(s2);
 	ns[len] = '\0';
 	return (ns);
 }
