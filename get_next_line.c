@@ -6,7 +6,7 @@
 /*   By: reribeir <reribeir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 07:00:12 by reribeir          #+#    #+#             */
-/*   Updated: 2024/11/25 11:38:41 by reribeir         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:32:41 by reribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,45 +19,36 @@ char	*get_next_line(int fd)
 	char	*str;
 	char	*ns;
 	int	i;
-	int	j;
 
 	i = 0;
-	j = 0;
 	bytes = 1;
-	if (rest != '\0')
+	str = NULL;
+	ns = NULL;
+	if (rest)
 	{
-		while (i <= ft_strlen(rest))
-		{
-			ns[i] = rest[j];
-			i++;
-			j++;
-		}
-		i = 0;
+		ns = ft_strjoin(ns, rest);
 		rest = restreset(rest);
 	}
-	while (!ft_strchr(str, '\n'))
+	while (!ft_strchr(str, '\n') && bytes != 0)
 	{
 		bytes = read(fd, str, BUFFER_SIZE);
-		if (ft_strchr(str, '\n'))
+		if (bytes <= 0)
 			break ;
-		while (str[i] != '\0')
-		{
-			ns = ft_strjoin(ns, str);
-			i++;
-		}
-		if (bytes == 0)
-			break ;
+		ns = ft_strjoin(ns, str);
+		str = restreset(str);
 	}
 	rest = ft_strchr(str, '\n');
+	ns = ft_strjoin(ns, ft_substr(str, 0, i));
 	return (ns);
 }
 
-char	restreset(char rest)
+char	*restreset(char *rest)
 {
 	int		i;
 	int		len;
 	char	*str;
 
+	str = NULL;
 	i = 0;
 	len = ft_strlen(rest);
 	while (i <= len)
@@ -67,7 +58,6 @@ char	restreset(char rest)
 	}
 	free (rest);
 	return(str);
-
 }
 
 int	main(void)
@@ -75,7 +65,6 @@ int	main(void)
 #include <fcntl.h>
 #include <stdio.h>
 	int	fd;
-	char	*line;
 
 	fd = open("file.txt", O_RDONLY);
 	printf("%s", get_next_line(fd));

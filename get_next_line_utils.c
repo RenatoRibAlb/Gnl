@@ -6,47 +6,44 @@
 /*   By: reribeir <reribeir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:42:12 by reribeir          #+#    #+#             */
-/*   Updated: 2024/11/21 13:20:50 by reribeir         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:57:19 by reribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
 	int		len;
-	char	*ns;
 
 	i = 0;
 	len = 0;
-	if ((char *)s1 && (char *)s2)
-		len = ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1;
-	ns = malloc(len * sizeof(char));
-	if (!ns)
+	if (s1 && s2)
+		len = ft_strlen(s1) + ft_strlen(s2) + 1;
+	s1 = malloc(len * sizeof(char));
+	if (!s1)
 		return (NULL);
 	len = 0;
 	while (s1[len] != '\0')
-	{
-		ns[len] = s1[len];
 		len++;
-	}
 	while (s2[i] != '\0')
 	{
-		ns[len] = s2[i];
+		s1[len] = s2[i];
 		i++;
 		len++;
 	}
-	free(s1);
 	free(s2);
-	ns[len] = '\0';
-	return (ns);
+	s1[len] = '\0';
+	return (s1);
 }
 
-static char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *s, int c)
 {
 	char	*str;
 
+	if(!s)
+		return (NULL);
 	str = (char *)s;
 	if (c == 0)
 		return (str + ft_strlen(str));
@@ -60,7 +57,7 @@ static char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-static int	ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
 	int	i;
 
@@ -70,14 +67,14 @@ static int	ft_strlen(char *str)
 	return (i);
 }
 
-static char	*verify(char *dest)
+char	*verify(char *dest)
 {
 	dest = malloc(1);
 	*dest = '\0';
 	return (dest);
 }
 
-static char	*ft_substr(char const *s, unsigned int start, size_t len)
+char	*ft_substr(char *s, int start, size_t len)
 {
 	char	*dest;
 	size_t	i;
@@ -89,7 +86,7 @@ static char	*ft_substr(char const *s, unsigned int start, size_t len)
 	if (!s)
 		return (NULL);
 	if (len == 0)
-		return (ft_strdup(""));
+		return (malloc(0));
 	if (start > ft_strlen(s))
 		return (verify(dest));
 	while (s[start++] != '\0' && i < len)
