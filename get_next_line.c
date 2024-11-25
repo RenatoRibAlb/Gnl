@@ -6,7 +6,7 @@
 /*   By: reribeir <reribeir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 07:00:12 by reribeir          #+#    #+#             */
-/*   Updated: 2024/11/25 16:32:41 by reribeir         ###   ########.fr       */
+/*   Updated: 2024/11/25 18:48:57 by reribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ char	*get_next_line(int fd)
 
 	i = 0;
 	bytes = 1;
-	str = NULL;
 	ns = NULL;
 	if (rest)
 	{
 		ns = ft_strjoin(ns, rest);
 		rest = restreset(rest);
 	}
+	str = malloc(BUFFER_SIZE * sizeof(char));
 	while (!ft_strchr(str, '\n') && bytes != 0)
 	{
 		bytes = read(fd, str, BUFFER_SIZE);
