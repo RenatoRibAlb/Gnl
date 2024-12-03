@@ -6,7 +6,7 @@
 /*   By: reribeir <reribeir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 07:00:12 by reribeir          #+#    #+#             */
-/*   Updated: 2024/11/25 18:48:57 by reribeir         ###   ########.fr       */
+/*   Updated: 2024/12/03 19:04:07 by reribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,13 @@ char	*get_next_line(int fd)
 		ns = ft_strjoin(ns, rest);
 		rest = restreset(rest);
 	}
-	str = malloc(BUFFER_SIZE * sizeof(char));
+	str = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	while (!ft_strchr(str, '\n') && bytes != 0)
 	{
 		bytes = read(fd, str, BUFFER_SIZE);
 		if (bytes <= 0)
 			break ;
+		str[bytes] = '\0';
 		ns = ft_strjoin(ns, str);
 		str = restreset(str);
 	}
@@ -42,22 +43,38 @@ char	*get_next_line(int fd)
 	return (ns);
 }
 
+char	*ft_strdup(char *s)
+{
+	char	*str;
+	int		i;
+
+	i = ft_strlen(s);
+	str = malloc((i + 1) * sizeof(char));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (s[i] != '\0')
+	{
+		str[i] = s[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
 char	*restreset(char *rest)
 {
 	int		i;
 	int		len;
-	char	*str;
 
-	str = NULL;
 	i = 0;
 	len = ft_strlen(rest);
-	while (i <= len)
+	while (i < len)
 	{
-		str[i] = '\0';
+		rest[i] = '\0';
 		i++;
 	}
-	free (rest);
-	return(str);
+	return(rest);
 }
 
 int	main(void)

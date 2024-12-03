@@ -6,7 +6,7 @@
 /*   By: reribeir <reribeir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:42:12 by reribeir          #+#    #+#             */
-/*   Updated: 2024/11/25 17:57:19 by reribeir         ###   ########.fr       */
+/*   Updated: 2024/12/03 19:09:56 by reribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,29 @@ char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
 	int		len;
+	char	*temp;
 
 	i = 0;
-	len = 0;
-	if (s1 && s2)
+	if (!s1)
+		len = ft_strlen(s2) + 1;
+	else
 		len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	s1 = malloc(len * sizeof(char));
+	temp = (char *)malloc(len * sizeof(char));
 	if (!s1)
 		return (NULL);
+	temp = ft_strdup(s1);
 	len = 0;
-	while (s1[len] != '\0')
-		len++;
-	while (s2[i] != '\0')
+	if (s1)
+		len = ft_strlen(s1);
+	while (s2[i])
 	{
-		s1[len] = s2[i];
+		temp[len] = s2[i];
 		i++;
 		len++;
 	}
 	free(s2);
-	s1[len] = '\0';
-	return (s1);
+	temp[len] = '\0';
+	return (temp);
 }
 
 char	*ft_strchr(const char *s, int c)
@@ -62,7 +65,7 @@ int	ft_strlen(char *str)
 	int	i;
 
 	i = 0;
-	while (str[i] != '\0')
+	while (str[i])
 		i++;
 	return (i);
 }

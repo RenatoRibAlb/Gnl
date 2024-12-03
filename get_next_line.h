@@ -6,7 +6,7 @@
 /*   By: reribeir <reribeir@student.42.rio>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 07:02:05 by reribeir          #+#    #+#             */
-/*   Updated: 2024/11/25 14:06:36 by reribeir         ###   ########.fr       */
+/*   Updated: 2024/12/03 19:06:57 by reribeir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,7 @@ char	*verify(char *dest);
 char	*ft_substr(char *s, int start, size_t len);
 
 char	*restreset(char *rest);
+
+char	*ft_strdup(char *s);
 
 #endif
