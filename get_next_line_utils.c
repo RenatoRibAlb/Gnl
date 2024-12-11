@@ -14,50 +14,68 @@
 
 char	*ft_strjoin(char *s1, char *s2)
 {
+	int		sizetotal;
+	char	*res;
 	int		i;
-	int		len;
-	char	*temp;
+	int		j;
 
 	i = 0;
-	if (!s1)
-		len = ft_strlen(s2) + 1;
-	else
-		len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	temp = (char *)malloc(len * sizeof(char));
-	if (!s1)
+	sizetotal = ft_strlen(s1) + ft_strlen(s2);
+	res = malloc(sizeof(char) * (sizetotal + 1));
+	if (!res || !s1 || !s2)
 		return (NULL);
-	temp = ft_strdup(s1);
-	len = 0;
-	if (s1)
-		len = ft_strlen(s1);
-	while (s2[i])
+	while (s1[i] != 0)
 	{
-		temp[len] = s2[i];
+		res[i] = s1[i];
 		i++;
-		len++;
 	}
-	free(s2);
-	temp[len] = '\0';
-	return (temp);
+	j = 0;
+	while (s2[j] != 0)
+	{
+		res[i] = s2[j];
+		i++;
+		j++;
+	}
+	res[sizetotal] = 0;
+	return (res);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(const char *string, int searchedChar )
 {
 	char	*str;
 
-	if(!s)
+	str = (char *)string;
+	while (*str != searchedChar && *str != 0)
+		str++;
+	if (*str == searchedChar)
+		return (str);
+	else
 		return (NULL);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	char	*str;
+	size_t	i;
+
 	str = (char *)s;
-	if (c == 0)
-		return (str + ft_strlen(str));
-	while (*str)
+	i = 0;
+	while (i < n)
 	{
-		if (*str == (unsigned char)c)
-			return (str);
-		else
-			str = str + 1;
+		str[i] = '\0';
+		i++;
 	}
-	return (NULL);
+}
+
+void	*ft_calloc(size_t count, size_t size)
+{
+	char	*res;
+
+	res = malloc(size * count);
+	if (!res)
+		return (NULL);
+	ft_bzero(res, size * count);
+	return (res);
 }
 
 int	ft_strlen(char *str)
@@ -68,38 +86,4 @@ int	ft_strlen(char *str)
 	while (str[i])
 		i++;
 	return (i);
-}
-
-char	*verify(char *dest)
-{
-	dest = malloc(1);
-	*dest = '\0';
-	return (dest);
-}
-
-char	*ft_substr(char *s, int start, size_t len)
-{
-	char	*dest;
-	size_t	i;
-	size_t	j;
-
-	dest = NULL;
-	i = 0;
-	j = start;
-	if (!s)
-		return (NULL);
-	if (len == 0)
-		return (malloc(0));
-	if (start > ft_strlen(s))
-		return (verify(dest));
-	while (s[start++] != '\0' && i < len)
-		i++;
-	dest = malloc((i + 1) * sizeof(char));
-	if (!dest)
-		return (NULL);
-	i = 0;
-	while (s[j] && i < len)
-		dest[i++] = s[j++];
-	dest[i] = '\0';
-	return (dest);
 }
