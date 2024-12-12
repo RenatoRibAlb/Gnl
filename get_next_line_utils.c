@@ -14,14 +14,14 @@
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	int		sizetotal;
+	int		lentotal;
 	char	*res;
 	int		i;
 	int		j;
 
 	i = 0;
-	sizetotal = ft_strlen(s1) + ft_strlen(s2);
-	res = malloc(sizeof(char) * (sizetotal + 1));
+	lentotal = ft_strlen(s1) + ft_strlen(s2);
+	res = malloc(sizeof(char) * (lentotal + 1));
 	if (!res || !s1 || !s2)
 		return (NULL);
 	while (s1[i] != 0)
@@ -36,18 +36,18 @@ char	*ft_strjoin(char *s1, char *s2)
 		i++;
 		j++;
 	}
-	res[sizetotal] = 0;
+	res[lentotal] = 0;
 	return (res);
 }
 
-char	*ft_strchr(const char *string, int searchedChar )
+char	*ft_strchr(const char *string, int c )
 {
 	char	*str;
 
 	str = (char *)string;
-	while (*str != searchedChar && *str != 0)
+	while (*str != c && *str != 0)
 		str++;
-	if (*str == searchedChar)
+	if (*str == c)
 		return (str);
 	else
 		return (NULL);

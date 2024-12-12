@@ -34,7 +34,7 @@ char	*read_file(int fd, char *res)
 
 	if (!res)
 		res = ft_calloc(1, 1);
-	buffer = ft_calloc(BUFFER_SIZE + 1, sizeof(char));
+	buffer = ft_calloc(BUFFER_SIZE + 2, sizeof(char));
 	bytes = 1;
 	while (bytes > 0)
 	{
@@ -63,7 +63,7 @@ char	*ft_line(char *buffer)
 		return (NULL);
 	while (buffer[i] && buffer[i] != '\n')
 		i++;
-	line = ft_calloc(i + 1, sizeof(char));
+	line = ft_calloc(i + 2, sizeof(char));
 	i = 0;
 	while (buffer[i] && buffer[i] != '\n')
 	{
@@ -72,6 +72,8 @@ char	*ft_line(char *buffer)
 	}
 	if (buffer[i] && buffer[i] == '\n')
 		line[i++] = '\n';
+	else
+		line[i++] = '\0';
 	return (line);
 }
 
@@ -107,7 +109,7 @@ char	*ft_free(char *buffer, char *buf)
 	return (temp);
 }
 
-/*int	main(void)
+int	main(void)
 {
 #include <fcntl.h>
 #include <stdio.h>
@@ -119,4 +121,4 @@ char	*ft_free(char *buffer, char *buf)
 	printf("%s", get_next_line(fd));
 
 }
-*/
+
